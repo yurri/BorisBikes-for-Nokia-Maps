@@ -35,6 +35,12 @@ class Downloader {
     // $this->getResponse()->setHeader('Content-Disposition', 'inline; filename=result.pdf');
     // however, for that you have to access the controller, and we're in the model
     // so I think it is okay to use the simple method below
+    
+    // these headers are only necessary for older versions of IE
+    header('Accept-Ranges: none');
+    header('Pragma: private');
+    header('Cache-Control: private');
+    // more common headers
     header('Content-type: ' . $this->getMIMEType());
     header('Content-disposition: attachment;filename=' . $this->getFilename());
     
