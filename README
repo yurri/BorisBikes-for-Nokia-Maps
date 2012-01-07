@@ -1,1 +1,7 @@
-This is a sample project
+This is a sample project which purpose is to serve as an example of Zend Framework usage.
+
+This application scrapes the London Bike Hire docking station locations from one of the TfL official pages
+and provides them for downloading in different formats, particularly in the peculiar LDB format which is
+used by Nokia Maps application on Nokia Symbian-based phones.
+
+The working version which tells about itself on its first page can be found at http://youshallnotpass.x10.mx
