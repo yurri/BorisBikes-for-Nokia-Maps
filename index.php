@@ -20,9 +20,9 @@ try {
   $loader->setFallbackAutoloader(true); // asking autoloader to act as a catch-all (any namespace)
 
   // it is easier and generally enough to have the config in a form of a global object
-  // but for demonstration purposes here let's a more ideologically correct singleton model class
-  $config = Config::singleton(); // underscore in class name makes Zend autoloader to search in Config/Singleton.php
-
+  // but for demonstration purposes here let's use a more ideologically correct singleton model class
+  $config = Config::getConfig();
+  
   // starting session for the visitor
   // we don't really need it in this particular application as we don't distinguish between the users
   // but still this is a standard step
@@ -31,7 +31,7 @@ try {
   Zend_Session::start();
   
   // now we need to start proccessing our request
-  // the necessary thing for that is controller initialisation which we'll do below
+  // the necessary thing for that is controller initialisation which we'll perform below
   // however, in a more complicated application other actions are required (e.g. defining routes)
   // which I decided to skip to avoid code cluttering
 
@@ -54,15 +54,16 @@ try {
 	$frontController->dispatch();
   
 } catch (Exception $e) {
-  // as we only need the config file in this block (we refer admin email below), we could skip creating the singleton above
+  // as we only need the config file in this block (we refer admin email below), we could have skipped creating the singleton above
   // but generally the config should be always available, so the good style is to keep it where it is
 	?>
-	<h1>Unknown problem</h1>
+	<h1>Houston, we've had a problem</h1>
 	<p>
     <strong>Details:</strong> <?php echo $e->getMessage(); ?>
   <p>
     Please contact me at
-		<a href="mailto:<?php echo $config->settings->admin->email; ?>"><?php echo $config->settings->admin->email; ?></a>
+		<a href="mailto:<?php echo $config->admin->email; ?>"><?php echo $config->admin->email; ?></a>.
+    Thanks.
 	</p>
 	<?php
 } 
