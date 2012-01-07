@@ -1,5 +1,6 @@
 <?php
 class IndexController extends Zend_Controller_Action {
+
   // things to happen before the action has been run
   public function preDispatch() {
     /*
@@ -12,13 +13,17 @@ class IndexController extends Zend_Controller_Action {
     /*
     A typical task to perform here is to "touch" visitor's session - otherwise it'll be
     terminated after certain time passes from its creation, and usually it is needed to cut it
-    after certain time passes since the last user's action
+    after certain time passes since the last user's action.
     */
   }
   
-  // the default action to happen
   public function indexAction() {
-    $this->view->test = 'Test';
+    $config = Config::singleton();    
+    $this->view->downloadForm = $this->_helper->FormsFactory($config->settings->forms->classes->download);
+  }
+  
+  public function downloadAction() {
+    $downloadForm = Form_Factory::getDownloadForm();
   }
 }
 ?>

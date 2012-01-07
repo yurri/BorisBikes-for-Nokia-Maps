@@ -1,0 +1,7 @@
+# rewrite rules for Zend Framework
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule .* index.php
+
+# security: Don't allow browsing of directories
+Options -Indexes
