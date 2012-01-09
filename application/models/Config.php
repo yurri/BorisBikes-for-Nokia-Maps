@@ -7,15 +7,12 @@ and focus on business logic instead.
 class Config extends Abstract_Singleton {
   private $__settings = null;  // a field to hold a Zend_Config_Ini instance
   
-  public function __construct() {
+  // as construction is protected, no accidental "new" outside is possible
+  protected function __construct() {
     // loading the configuration file
     $this->__settings = new Zend_Config_Ini(
-      // hardcoded value clearly isn't the best style but using it here is justified
-      // it can be improved though by defining constants in index.php and then
-      // but I don't think that's necessary
-      './application/config/config.ini',
-      // change the following line in a diffent environment to read a different config section
-      'production'
+      APPLICATION_PATH . '/config/config.ini',
+      APPLICATION_ENV
     );
   }
   

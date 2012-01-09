@@ -1,7 +1,15 @@
+# basically, from which section of the INI file settings should be read
+# it is possible to use it elsewhere, but it's better never rely on this value
+# for the purpose other than configuration initialisation
+SetEnv APPLICATION_ENV production
+ 
 # rewrite rules for Zend Framework
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule .* index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
 
-# security: Don't allow browsing of directories
+# security measure: don't allow browsing of directories
 Options -Indexes
